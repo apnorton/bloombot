@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from bot_interface import BotInterface
+from bot.bot_interface import BotInterface
 
 if __name__ == '__main__':
   bi = BotInterface()

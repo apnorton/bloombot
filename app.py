@@ -7,7 +7,7 @@ from urllib.request import Request, urlopen
 
 from flask import Flask, request
 
-from bot_interface import BotInterface
+from bot.bot_interface import BotInterface
 
 app = Flask(__name__)
 bi  = BotInterface()
