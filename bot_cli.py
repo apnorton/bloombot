@@ -17,5 +17,6 @@ if __name__ == '__main__':
     msg['timestamp'] = str(datetime.now())
 
     reply = bi.process_message(msg)
-    print(reply['text'])
+    if reply:
+      print(reply['text'])
 

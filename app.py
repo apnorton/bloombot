@@ -7,15 +7,27 @@ from urllib.request import Request, urlopen
 
 from flask import Flask, request
 
+from bot_interface import BotInterface
+
 app = Flask(__name__)
+bi  = BotInterface()
 
 
 @app.route('/', methods=['POST'])
 def webhook():
   data = request.get_json()
-  log(data)
 
-  send_message('Hello, world!')
+  # We don't want to reply to ourselves!
+  if data['name'] != 'Bloombot':
+    msg = {}
+    msg['author']    = data['name']
+    msg['author_id'] = data['sender_id']
+    msg['text']      = data['text']
+
+    reply = bi.process_message(msg)
+    if reply:
+      send_message(reply['text'])
+  
 
   return "ok", 200
 

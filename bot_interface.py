@@ -10,9 +10,12 @@ class BotInterface:
 
   # process_message
   #   msg : dictionary
-  #    has keys "author", "text", and "timestamp"
+  #    has keys "author", "text", and "author_id"
   #   returns new msg dictionary:
   #    (just text key for now)
   def process_message(self, msg):
-    reply = 'Hi {}. I got your message: "{}" at {}'.format(msg['author'], msg['text'], msg['timestamp']) 
-    return { 'text' : reply }
+    if any(map(lambda s: s in msg['text'], ['Hi', 'Hello', 'bot'])):
+      reply = 'Hi {}!  It\'s nice to meet you.'.format(msg['author'])
+      return { 'text' : reply }
+    
+    return None
