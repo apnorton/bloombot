@@ -14,5 +14,5 @@ def webhook():
   log(data)
   
 def log(msg):
-  print str(msg)
+  print(str(msg))
   sys.stdout.flush()
