@@ -16,6 +16,7 @@ bi  = BotInterface()
 @app.route('/', methods=['POST'])
 def webhook():
   data = request.get_json()
+  print(data)
 
   # We don't want to reply to ourselves!
   if data['name'] != 'Bloombot':
@@ -27,19 +28,23 @@ def webhook():
     reply = bi.process_message(msg)
     if reply:
       send_message(reply['text'])
-  
 
   return "ok", 200
 
 def send_message(msg):
+  if os.environ['BLOOMBOT_DEBUG'] == '1':
+    print('[Bloombot]: ' + msg)
+    return
+    
+  # if not in debug mode, use the right url 
   url  = 'https://api.groupme.com/v3/bots/post'
+
   data = {
           'bot_id' : '5b69eeb4c800c919c2aff81edc',
           'text'   : msg,
          }
   request = Request(url, urlencode(data).encode())
   json = urlopen(request).read().decode()
-  log(json)
   
 def log(msg):
   print(str(msg))
