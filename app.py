@@ -3,7 +3,7 @@ import sys
 import json
 
 from urllib.parse import urlencode
-from urllib.reqest import Request, urlopen
+from urllib.request import Request, urlopen
 
 from flask import Flask, request
 
