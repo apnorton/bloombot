@@ -32,7 +32,7 @@ def webhook():
   return "ok", 200
 
 def send_message(msg):
-  if os.environ['BLOOMBOT_DEBUG'] == '1':
+  if 'BLOOMBOT_DEBUG' in os.environ:
     print('[Bloombot]: ' + msg)
     return
     
