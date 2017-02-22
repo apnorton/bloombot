@@ -16,7 +16,6 @@ bi  = BotInterface()
 @app.route('/', methods=['POST'])
 def webhook():
   data = request.get_json()
-  print(data)
 
   # We don't want to reply to ourselves!
   if data['name'] != 'Bloombot':
@@ -30,6 +29,16 @@ def webhook():
       send_message(reply['text'])
 
   return "ok", 200
+
+@app.route('/canned', methods=['POST'])
+def canned_webhook():
+  data = request.get_json()
+  print(data)
+  reply = bi.canned_reply(data['topic'])
+  send_message(reply['text'])
+
+  return "ok", 200
+
 
 def send_message(msg):
   if 'BLOOMBOT_DEBUG' in os.environ:

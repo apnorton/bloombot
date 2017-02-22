@@ -38,13 +38,31 @@ def send_to_bot(msg):
 
   reply = urlopen(request).read().decode()
 
+def request_canned_message(title):
+  url  = 'http://127.0.0.1:8000/canned'
+  data = {
+          "topic": title,
+         }
+  params = json.dumps(data).encode('utf-8')
+
+  request = Request(url, data=params)
+  request.add_header('Content-Type', 'application/json')
+
+  reply = urlopen(request).read().decode()
+
 if __name__ == '__main__':
   while True:
     text = input('>>> ')
 
-    if text == 'quit()':
-      break
-
+    if text.startswith(':'):
+      commands = text.split()
+      # special commands:
+      print(commands)
+      if commands[0] == ':quit':
+        break
+      elif commands[0] == ':canned':
+        request_canned_message(commands[1])
+        
     msg = {}
     msg['author']    = 'Andrew Norton'
     msg['text']      = text

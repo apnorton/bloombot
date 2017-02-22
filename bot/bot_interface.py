@@ -19,3 +19,9 @@ class BotInterface:
       return { 'text' : reply }
     
     return None
+
+  def canned_reply(self, title):
+    if title == 'timesheets':
+      return {'text': 'Don\'t forget to submit timesheets!'}
+    else:
+      return {'text': 'I have no canned reply for this situation'}
