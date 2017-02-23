@@ -17,8 +17,8 @@ bi  = BotInterface()
 def webhook():
   data = request.get_json()
 
-  # We don't want to reply to ourselves!
-  if data['name'] != 'Bloombot':
+  # We don't want to reply to ourselves, and must mention us!
+  if data['name'] != 'Bloombot' and 'bloombot' in data['text'].lower():
     msg = {}
     msg['author']    = data['name']
     msg['author_id'] = data['sender_id']

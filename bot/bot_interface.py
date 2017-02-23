@@ -1,4 +1,4 @@
-
+from bot.bot_controller import BotController
 
 class BotInterface:
   # Fields:
@@ -6,7 +6,7 @@ class BotInterface:
   # 
 
   def __init__(self):
-    self.bot = None
+    self.bot = BotController()
 
   # process_message
   #   msg : dictionary
@@ -14,11 +14,9 @@ class BotInterface:
   #   returns new msg dictionary:
   #    (just text key for now)
   def process_message(self, msg):
-    if any(map(lambda s: s in msg['text'], ['Hi', 'Hello', 'bot'])):
-      reply = 'Hi {}!  It\'s nice to meet you.'.format(msg['author'])
-      return { 'text' : reply }
-    
-    return None
+    msg = self.bot.process_message(msg)
+
+    return msg 
 
   def canned_reply(self, title):
     if title == 'timesheets':

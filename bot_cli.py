@@ -57,7 +57,6 @@ if __name__ == '__main__':
     if text.startswith(':'):
       commands = text.split()
       # special commands:
-      print(commands)
       if commands[0] == ':quit':
         break
       elif commands[0] == ':canned':
