@@ -49,7 +49,7 @@ def send_message(msg):
   url  = 'https://api.groupme.com/v3/bots/post'
 
   data = {
-          'bot_id' : '5b69eeb4c800c919c2aff81edc',
+          'bot_id' : os.getenv('GROUPME_BOT_ID'),
           'text'   : msg,
          }
   request = Request(url, urlencode(data).encode())
